@@ -14,6 +14,8 @@ x1_list = []  # lista zawierajaca spis wszystkich konenerow X1
 x1_weight_list = []  # lista zawierajaca spis ciezarow wszystkich kontenerow X1
 ship_id = 0  # robocze id nadane aktualnie analizowanemu statkowi
 class_size = {}
+pl_list = []  # kontenery polskich firm
+companies_list = []
 
 # Usuwanie pustych rekordow
 while ship_id != len(all_ships):
@@ -35,6 +37,29 @@ print("Desination JP:", destination_jp)
 
 # Zliczenie liczby statkow danej klasie
 total_number_of_ships_in_class = class_sizes(ships_classes, all_ships)
+
+# Znalezienei indeksow kontenerow polskich firm
+polish_containers = cargo_country_index("pl", all_containers)
+
+# Kopiowanie kontenerow polskich firm na nowa liste
+for element in polish_containers:
+    pl_list.append(all_containers[element])
+
+# Wyciagniecie informacji o nazwie firmy
+for container in pl_list:
+    companies_list = container_info(6, pl_list)
+
+# Zliczenie ilosci kontenerow wyslanych przez firme
+pl_list = {}
+for company in companies_list:
+    pl_list.setdefault(company, 0)
+    pl_list[company] += 1
+
+# for company, count in pl_list.items():
+#     print("{}{}".format(company, count))
+
+biggest_company = max(pl_list, key=lambda k: pl_list[k])
+print("Biggest company:", biggest_company)
 
 # Znalezienie indeksow ladunkow typu X1 na liscie all_containers
 containers_indexes = cargo_type_index("X1", all_containers)
