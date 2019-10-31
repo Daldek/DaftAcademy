@@ -62,3 +62,22 @@ def cargo_type_index(type, list_of_containers):
             pass
         container_index += 1
     return index_list
+
+def containers_in_classes(class_dict, input_list):
+    class_size = {}
+    for k, v in class_dict.items():
+        for value_pair in input_list:
+            if k == value_pair[0]:
+                v = v + value_pair[1]
+        class_size.update({k: v})
+    return class_size
+
+def class_sizes(class_dict, ship_list):
+    class_list = ship_info(3, ship_list)
+    class_size = {}
+    for k, v in class_dict.items():
+        for ship in class_list:
+            if k == ship:
+                v += 1
+        class_size.update({k: v})
+    return class_size
