@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c0d89a92-452b-431a-aaf9-365cc23d3406" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Funkcje.py" beforeDir="false" afterPath="$PROJECT_DIR$/Funkcje.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kontenery.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kontenery.py" afterDir="false" />
-    </list>
+    <list default="true" id="c0d89a92-452b-431a-aaf9-365cc23d3406" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,47 +10,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="Kontenery.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/Kontenery.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="391">
-                  <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
-                  <folding>
-                    <element signature="e#0#19#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="Funkcje.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/Funkcje.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="493">
-                  <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
-                  <folding>
-                    <element signature="e#100#114#0" />
-                    <element signature="e#170#653#0" />
-                    <element signature="e#719#1513#0" />
-                    <element signature="e#1576#1870#0" />
-                    <element signature="e#1924#2232#0" />
-                    <element signature="e#2289#2597#0" />
-                    <element signature="e#2654#2872#0" />
-                    <element signature="e#2918#3147#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -167,7 +123,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.23703256" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32967034" />
@@ -175,7 +130,7 @@
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32967034" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32967034" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26923078" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.26923078" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32967034" />
       <window_info id="Favorites" order="2" side_tool="true" />
