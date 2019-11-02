@@ -51,24 +51,24 @@ def containers2country(destination, list_of_containers):
             pass
     return number_of_containers
 
-def cargo_type_index(type, list_of_containers):
+def cargo_type_index(type_sought, list_of_containers):
     containers_info_list = container_info(5, list_of_containers)
     index_list = []
     container_index = 0
     for cargo_type in containers_info_list:
-        if cargo_type == type:
+        if cargo_type == type_sought:
             index_list.append(container_index)
         else:
             pass
         container_index += 1
     return index_list
 
-def cargo_country_index(type, list_of_containers):
+def cargo_country_index(type_sought, list_of_containers):
     containers_info_list = container_info(7, list_of_containers)
     index_list = []
     container_index = 0
     for cargo_type in containers_info_list:
-        if cargo_type == type:
+        if cargo_type == type_sought:
             index_list.append(container_index)
         else:
             pass
@@ -93,3 +93,12 @@ def class_sizes(class_dict, ship_list):
                 v += 1
         class_size.update({k: v})
     return class_size
+
+def type_calc(type_dict, input_list):
+    calc = {}
+    for k, v in type_dict.items():
+        for value_pair in input_list:
+            if k == value_pair[0]:
+                v = v + value_pair[1]
+        calc.update({k: v})
+    return calc
