@@ -9,17 +9,15 @@ all_ships = df.columns  # pobiera statki z pliku CSV
 filtered_df = []  # usuwa puste rekordy ze zmiennej 'df'
 containers = []  # zbiera informacje o kontenerach na analizowanym statku
 all_containers = []  # zawiera wszystkie kontenery
-x1_list = []  # lista zawierajaca spis wszystkich konenerow X1
+x1_containers = []  # lista zawierajaca spis wszystkich konenerow X1
 x1_weight_list = []  # lista zawierajaca spis ciezarow wszystkich kontenerow X1
 ship_id = 0  # robocze id nadane aktualnie analizowanemu statkowi
-class_size = {}
-pl_list = []  # kontenery polskich firm
-de_list = []  # kontenery niemieckich firm
-companies_list = []
-de_type_list = []
-de_weight_list = []
-de_cost_list = []
-german_containers = []
+polish_containers = []  # kontenery polskich firm
+polish_companies = []  # polskie firmy
+german_containers = []  # kontenery niemieckich firm
+german_type_list = []  # typy kontenerow wyslane przez niemieckie firmy
+german_weight_list = []  # ciezary niemieckich kontenerow
+german_cost_list = []  # wartosci niemieckich kontenerow
 
 # Usuwanie pustych rekordow
 while ship_id != len(all_ships):
@@ -43,25 +41,25 @@ print("Desination JP:", destination_jp)
 total_number_of_ships_in_class = class_sizes(ships_classes, all_ships)
 
 # Znalezienei indeksow kontenerow polskich firm
-polish_containers = cargo_country_index("pl", all_containers)
+polish_indexes = cargo_country_index("pl", all_containers)
 
 # Kopiowanie kontenerow polskich firm na nowa liste
-for container in polish_containers:
-    pl_list.append(all_containers[container])
+for index in polish_indexes:
+    polish_containers.append(all_containers[index])
 
 # Wyciagniecie informacji o nazwie firmy
-for container in pl_list:
-    companies_list = container_info(6, pl_list)
+for container in polish_containers:
+    polish_companies = container_info(6, polish_containers)
 
 # Zliczenie ilosci kontenerow wyslanych przez firme
-pl_list = {}
-for company in companies_list:
-    pl_list.setdefault(company, 0)
-    pl_list[company] += 1
+polish_containers = {}
+for company in polish_companies:
+    polish_containers.setdefault(company, 0)
+    polish_containers[company] += 1
 
 # Znalezienie najwiekszej polskiej firmy
-biggest_company = max(pl_list, key=lambda k: pl_list[k])
-print("Biggest polish company:", biggest_company)
+biggest_polish_company = max(polish_containers, key=lambda k:polish_containers[k])
+print("Biggest polish company:", biggest_polish_company)
 
 # Znalezienie indeksow kontenerow niemieckich firm
 german_indexes = cargo_country_index("de", all_containers)
@@ -70,34 +68,33 @@ german_indexes = cargo_country_index("de", all_containers)
 for index in german_indexes:
     german_containers.append(all_containers[index])
 
-
 # Wyciagniecie informacji o ladunku
 for container in german_containers:
-    de_weight_list = container_info(4, german_containers)
-    de_type_list = container_info(5, german_containers)
-    de_cost_list = container_info(8, german_containers)
+    german_weight_list = container_info(4, german_containers)
+    german_type_list = container_info(5, german_containers)
+    german_cost_list = container_info(8, german_containers)
 
-de_weight_list = list(map(int, de_weight_list))
-de_cost_list = list(map(int, de_cost_list))
+german_weight_list = list(map(int, german_weight_list))
+german_cost_list = list(map(int, german_cost_list))
 
 # Stworzenie drugiego poziomu listy zawierajacej info o typie ladunku
-de_list = elements2list(de_type_list)
-de_list2 = elements2list(de_type_list)
+de_list = elements2list(german_type_list)
+de_list2 = elements2list(german_type_list)
 
 # Dodanie do wewnetrznych list informacji o ciezarze
-de_cargo_index = 0
+german_cargo_index = 0
 for container in de_list:
-    container.append(de_weight_list[de_cargo_index])
-    de_cargo_index += 1
+    container.append(german_weight_list[german_cargo_index])
+    german_cargo_index += 1
 
 # Dodanie do wewnetrznych list informacji o cenie
-de_cargo_index2 = 0
+german_cargo_index2 = 0
 for container2 in de_list2:
-    container2.append(de_cost_list[de_cargo_index2])
-    de_cargo_index2 += 1
+    container2.append(german_cost_list[german_cargo_index2])
+    german_cargo_index2 += 1
 
 # Konwersja listy typow ladunku do slownika
-cargo_type_dict = dict.fromkeys(de_type_list, 0)
+cargo_type_dict = dict.fromkeys(german_type_list, 0)
 
 # Sumowanie masy wszystkich typow
 type_total_weight = type_calc(cargo_type_dict, de_list)
@@ -111,14 +108,14 @@ most_expensive = max(weight_cost_ratio, key=lambda k: weight_cost_ratio[k])
 print("Most expensive:", most_expensive)
 
 # Znalezienie indeksow ladunkow typu X1 na liscie all_containers
-containers_indexes = cargo_type_index("X1", all_containers)
+X1_indexes = cargo_type_index("X1", all_containers)
 
 # Kopiowanie kontenerow z ladunkiem X1 na nowa liste
-for element in containers_indexes:
-    x1_list.append(all_containers[element])
+for element in X1_indexes:
+    x1_containers.append(all_containers[element])
 
 # Odczytanie ciezaru kazdego z kontenera X1 i dodanie na nowa liste
-for container in x1_list:
+for container in x1_containers:
     container_pattern = re.compile(
         r'([A-Z][A-Z])-([A-Z][A-Z])-(\d+)/(\d\d\d\d)'
         '/(\w\w)@(\w+)\.([a-z][a-z])/(\d+)')
@@ -133,19 +130,19 @@ avg_x1_weight = math.ceil(x1_total_weight/len(x1_weight_list))
 print("Average weight:", avg_x1_weight)
 
 # Zliczenie licby rekordow w kolumnach, czyli ile przewozi kazdy statek
-total_rows_list = []
+total_number_of_containers = []
 for ship_name in all_ships:
-    total_rows = df[ship_name].count()
-    total_rows_list.append(total_rows)
+    total = df[ship_name].count()
+    total_number_of_containers.append(total)
 
 ship_class_list = ship_info(3, all_ships)
 
 ship_class_list = elements2list(ship_class_list)
 
-load_cargo_index = 0
-for each_ship in ship_class_list:
-    each_ship.append(total_rows_list[load_cargo_index])
-    load_cargo_index += 1
+load_index = 0
+for each_class in ship_class_list:
+    each_class.append(total_number_of_containers[load_index])
+    load_index += 1
 
 class_size = containers_in_classes(ships_classes, ship_class_list)
 
